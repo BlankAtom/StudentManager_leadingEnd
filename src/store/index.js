@@ -39,7 +39,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state:{
     accessToken: getAccessToken(),
-    username: '',
+    username: 'admin',
     avatar: "",
     permissions: [],
     power: 0,

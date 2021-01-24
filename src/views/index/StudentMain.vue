@@ -1,67 +1,63 @@
 <template>
-<div>
-<!--    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">-->
-<!--        <el-radio-button :label="false">展开</el-radio-button>-->
-<!--        <el-radio-button :label="true">收起</el-radio-button>-->
-<!--    </el-radio-group>-->
+  <div id="page-box">
     <el-container>
-      <div>
+      <el-aside  id="left-aside">
         <el-menu
             router
             default-active="1-2"
             class="el-menu-vertical-demo"
+            background-color="#545c64"
+            style="height: 100%"
             @open="handleOpen"
             @close="handleClose"
             :collapse="isCollapse">
 
-          <div id="sider-header">
-            <span><i class="el-icon-s-home"></i></span>学生成绩管理系统
+          <div id="sider-header" @click="changeCollapse(!isCollapse)" >
+            <i class="el-icon-s-home"></i>
+            <span v-if="!isCollapse">学生成绩管理系统</span>
           </div>
-          <el-menu-item index="1">
-            <template slot="title">
-              <i class="el-icon-user-solid"></i>
-              <span slot="title">首页</span>
-            </template>
-          </el-menu-item>
-          <el-menu-item index="2">
-            <template slot="title">
-              <i class="el-icon-collection"></i>
-              <span slot="title">成绩</span>
-            </template>
-          </el-menu-item>
-          <el-menu-item index="3">
-            <template slot="title">
-              <i class="el-icon-edit-outline"></i>
-              <span slot="title">课程选修</span>
-            </template>
-          </el-menu-item>
+          <el-menu-item-group>
+            <el-menu-item index="1">
+                <i class="el-icon-user-solid"></i>
+                <span slot="title">首页</span>
+            </el-menu-item>
+            <el-menu-item index="2">
+                <i class="el-icon-collection"></i>
+                <span slot="title">成绩</span>
+            </el-menu-item>
+            <el-menu-item index="3">
+                <i class="el-icon-edit-outline"></i>
+                <span slot="title">课程选修</span>
+            </el-menu-item>
+          </el-menu-item-group>
+
         </el-menu>
-      </div>
+      </el-aside>
 
-        <el-container>
-            <el-header >
-                <el-radio-group v-model="isCollapse" style="float: left;margin-bottom: 20px;">
-                    <el-radio-button :label="true" >收起</el-radio-button>
-                    <el-radio-button :label="false" >展开</el-radio-button>
-                </el-radio-group>
-                <el-dropdown style="margin-right: 15px; font-size: 25px" >
+      <el-container>
+        <el-header >
+          <el-dropdown style="margin-right: 15px; font-size: 25px" >
 
-                    <span class="el-dropdown-link">
-                        <span>{{username}}</span>
-                        <i class="el-icon-setting"><span></span></i>
-                    </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item @click.native="toProfile" >个人信息</el-dropdown-item>
-                        <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </el-header>
-            <el-main>
-                <router-view></router-view>
-            </el-main>
-        </el-container>
+            <span class="el-dropdown-link">
+                <span>{{username}}</span>
+                <i class="el-icon-setting"><span></span></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="toProfile" >个人信息</el-dropdown-item>
+              <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </el-header>
+        <el-main>
+          <div ></div>
+          <router-view></router-view>
+        </el-main>
+        <el-footer>
+
+        </el-footer>
+      </el-container>
     </el-container>
-</div>
+  </div>
 </template>
 
 <script>
@@ -76,6 +72,21 @@
             }
         },
         methods: {
+          changeCollapse(colla){
+            const aside = document.getElementById("left-aside");
+            this.isCollapse = colla;
+
+            if (!colla) {
+              aside.style.width = "200px"
+            }
+            else {
+              aside.style.width = "80px"
+            }
+          },
+            handleSide() {
+              this.isCollapse=!this.isCollapse
+              console.log(this.isCollapse)
+            },
             handleOpen(key, keyPath) {
                 //console.log(key, keyPath);
             },
@@ -103,25 +114,37 @@
 </script>
 
 <style scoped>
+    #page-box,.el-container {
+      height: 100%;
+    }
+    .el-aside {
+      text-align: center;
+      line-height: 200px;
+      color: white;
+      width: 200px;
+      /*height: 100%;*/
+      /*position: relative;*/
+    }
+    .el-menu-item {
+      color: white;
+      font-size: 12pt;
+    }
     .el-header{
-        padding-top: 10px;
+        padding: 10px;
         text-align: right;
         font-size: 20px;
-        background-color: #f0fcff;
+      color: white;
 
     }
     .el-menu-vertical-demo:not(.el-menu--collapse) {
-        width: 250px;
-        min-height: 500px;
+        width: 200px;
+        height: 100%;
+        min-height: 100%;
     }
     .el-dropdown-link{
         cursor: pointer;
     }
-
     #sider-header {
-      /*height: px;*/
-      padding-top: 40px;
-      padding-bottom: 40px;
       text-align: center;
     }
 </style>
