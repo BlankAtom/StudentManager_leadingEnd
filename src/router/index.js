@@ -12,6 +12,10 @@ const constantRoutes = [{
         props: true,
         children: [
             {
+                path: '/teacher/file',
+                component: () => import('@/views/teacher/SetGradeByFile')
+            },
+            {
                 path: '/teacher/self',
                 component: () => import('../views/teacher/Profile')
             },

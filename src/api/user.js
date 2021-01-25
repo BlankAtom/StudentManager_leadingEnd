@@ -97,7 +97,7 @@ export function changeTeacherAddress(data) {
 
 export function getOnlyBySno(data) {
     return request({
-        url: "/teacher/onlyCourse",
+        url: "/teacher/course",
         method: "post",
         data
     });
@@ -109,6 +109,14 @@ export function setGrade(data) {
         method: "post",
         data
     });
+}
+
+export function setGrades(data) {
+    return request({
+        url: "teacher/grades",
+        method: "post",
+        data
+    })
 }
 
 export function changeTeacherBank(data) {

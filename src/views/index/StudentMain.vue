@@ -60,38 +60,37 @@
     export default {
         name: "Main",
         props: ['username'],
-        data(){
+        data() {
             return {
                 isCollapse: false,
                 screenHeight: '',
             }
         },
-      mounted() {
-        this.changeCollapse(false)
-        this.showInfo()
-      },
-      methods: {
-          changeCollapse(colla){
-            const aside = document.getElementById("left-aside");
-            this.isCollapse = colla;
+        mounted() {
+            this.changeCollapse(false)
+            this.showInfo()
+        },
+        methods: {
+            changeCollapse(colla) {
+                const aside = document.getElementById("left-aside");
+                this.isCollapse = colla;
 
-            if (!colla) {
-              aside.style.width = "210px"
-            }
-            else {
-              aside.style.width = "80px"
-            }
-          },
+                if (!colla) {
+                    aside.style.width = "210px"
+                } else {
+                    aside.style.width = "80px"
+                }
+            },
             handleOpen(key, keyPath) {
                 //console.log(key, keyPath);
             },
             handleClose(key, keyPath) {
                 //console.log(key, keyPath);
             },
-            toProfile(){
+            toProfile() {
                 this.$router.push("/student/self");
             },
-            logout(){
+            logout() {
                 this.$router.push("/logout");
             },
             showInfo() {
@@ -99,10 +98,10 @@
         },
         beforeCreate() {
             let t = this.$store.state.power;
-            if(t===2){
+            if (t === 2) {
                 this.$router.push('/teacher')
             }
-            if( t===9){
+            if (t === 9) {
                 this.$router.push('/admin')
             }
         }

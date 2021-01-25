@@ -26,6 +26,7 @@ import {
   getGradeInfo,
   getOnlyBySno,
   getStudentDetail,
+  getStudentMain,
   getStudentProfile,
   getStudentsByInfo,
   getTeacher,
@@ -33,10 +34,10 @@ import {
   insertStudent,
   login,
   setGrade,
+  setGrades,
   udpCourse,
   udpStudent,
-  udpTeacher,
-  getStudentMain
+  udpTeacher
 } from "@/api/user";
 import {messageDuration} from "@/config/settings";
 import {Message} from "element-ui"
@@ -91,6 +92,9 @@ const store = new Vuex.Store({
             "error"
         );
       }
+    },
+    async setGrades({commit, state}, data){
+      return setGrades(data);
     },
     async getStudentInfo({commit, state}){
       return getStudentMain({username: state.username});

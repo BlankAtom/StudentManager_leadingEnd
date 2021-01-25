@@ -8,40 +8,46 @@
                           @blur="getCourse"
                           placeholder="请输入学号"></el-input>
             </el-form-item>
-            <el-form-item label="检测类型" prop="ctype">
-                <el-select v-model="form.ctype" placeholder="请选择" @change="getCtypeName">
-                    <el-option v-for="item in ctypes"
-                               :key="item.value"
-                               :label="item.label"
-                               :value="item.value">
-                    </el-option>
+            <el-form-item label="姓名" prop="sno">
+                <el-input v-model="form.sname" disabled></el-input>
+            </el-form-item>
+            <el-form-item label="班级" prop="sno">
+                <el-input v-model="form.sclass" disabled></el-input>
+            </el-form-item>
+<!--            <el-form-item label="检测类型" prop="ctype">-->
+<!--                <el-select v-model="form.ctype" placeholder="请选择" @change="getCtypeName">-->
+<!--                    <el-option v-for="item in ctypes"-->
+<!--                               :key="item.value"-->
+<!--                               :label="item.label"-->
+<!--                               :value="item.value">-->
+<!--                    </el-option>-->
 
-                </el-select>
-            </el-form-item>
-            <el-form-item label="考核类型" prop="etype">
-                <el-select v-model="form.etype" placeholder="请选择" @change="getEtypeName">
-                    <el-option v-for="item in etypes"
-                               :key="item.label"
-                               :label="item.label"
-                               :value="item.value">
-                    </el-option>
-                </el-select>
-            </el-form-item>
+<!--                </el-select>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="考核类型" prop="etype">-->
+<!--                <el-select v-model="form.etype" placeholder="请选择" @change="getEtypeName">-->
+<!--                    <el-option v-for="item in etypes"-->
+<!--                               :key="item.label"-->
+<!--                               :label="item.label"-->
+<!--                               :value="item.value">-->
+<!--                    </el-option>-->
+<!--                </el-select>-->
+<!--            </el-form-item>-->
             <el-form-item label="课程" prop="course">
                 <el-select v-model="form.course" id="course-select" placeholder="请选择" @change="getCname">
                     <el-option
                         v-for="item in courses"
                         :key="item.cname"
                         :label="item.cname"
-                        :value="item.cno" ></el-option>
+                        :value="item.cname" ></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="占比(%)" prop="percent">
-                <el-slider
-                        v-model="form.percent"
-                        show-input>
-                </el-slider>
-            </el-form-item>
+<!--            <el-form-item label="占比(%)" prop="percent">-->
+<!--                <el-slider-->
+<!--                        v-model="form.percent"-->
+<!--                        show-input>-->
+<!--                </el-slider>-->
+<!--            </el-form-item>-->
             <el-form-item label="分数" prop="grade">
                 <el-input v-model="form.grade"
                           placeholder="请输入分数"
@@ -60,10 +66,9 @@
                 :before-close="handleClose1">
             <el-row>
                 <el-col>学号：{{form.sno}}</el-col>
-                <el-col>检测类型：{{ctypeName}}</el-col>
-                <el-col>考核类型：{{etypeName}}</el-col>
+                <el-col>姓名：{{form.sname}}</el-col>
+                <el-col>班级：{{form.sclass}}</el-col>
                 <el-col>课程：{{courseName}}</el-col>
-                <el-col>占比：{{form.percent}}%</el-col>
                 <el-col>分数：{{form.grade}}</el-col>
             </el-row>
             <span slot="footer" class="dialog-footer">
@@ -93,11 +98,10 @@
             return {
                 form: {
                     sno: '',
-                    ctype: '',
-                    etype: '',
+                    sname: '',
+                    sclass: '',
                     course: '',
                     cname: '',
-                    percent: 0,
                     grade: '',
 
                 },
