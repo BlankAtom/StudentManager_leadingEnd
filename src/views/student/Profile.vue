@@ -1,145 +1,48 @@
 <template>
-    <div>
-        <el-row>
-            <el-container>
-                <el-aside>
-                    <el-image :src="imgsrc"></el-image>
-                    <el-row>
-                        <div class="aside-box-name">{{userProfile.sname}}</div>
-                        <div class="aside-box-name aside-box-pingyin">{{userProfile.pinyin}}</div>
-                    </el-row>
-                </el-aside>
-                <section class="el-section">
-                    <div style="margin: 0px 0px 20px 0px; padding-bottom: 2px;">
-                        <el-divider content-position="center" >
-                            <span style="font-size: 2em; ">个人信息</span>
-                        </el-divider>
-                    </div>
-                    <div >
-                        <el-row :gutter="21" align="center" justify="center">
-                            <el-col :span="8">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">班级：</span>{{userProfile.classname}}
-                                </div>
-                            </el-col>
-                            <el-col :span="9">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">学号：</span>{{userProfile.sno}}
-                                </div>
-                            </el-col>
-                            <el-col :span="4">
-                                <div class="grid-content bg-purple ">
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <el-row  :gutter="21" >
-                            <el-col :span="6">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">性别：</span>{{userProfile.sex}}
-                                </div>
-                            </el-col>
-                            <el-col :span="10">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">出生日期：</span>{{userProfile.birth}}
-                                </div>
-                            </el-col>
-                            <el-col :span="5">
-                                <div class="grid-content bg-purple ">
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <el-row justify="center" align="middle" :gutter="20">
-                            <el-col :span="8">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">学院：</span>{{userProfile.college}}
-                                </div>
-                            </el-col>
-                            <el-col :span="7">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">专业：</span>{{userProfile.major}}
-                                </div>
-                            </el-col>
-                            <el-col :span="6">
-                                <div class="grid-content bg-purple ">
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <el-row justify="center" align="middle" :gutter="20">
-                            <el-col :span="14">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">身份证号：</span>{{userProfile.cardId}}
-                                </div>
-                            </el-col>
-                            <el-col :span="7">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">生源地：</span>{{userProfile.fromname}}
-                                </div>
-                            </el-col>
-                            <el-col :span="0">
-                                <div class="grid-content bg-purple ">
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <el-row justify="center" align="middle" :gutter="20">
-                            <el-col :span="10">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">联系电话：</span>{{userProfile.phone}}
-                                </div>
-                            </el-col>
-                            <el-col :span="9">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">邮箱：</span>{{userProfile.email}}
-                                </div>
-                            </el-col>
-                            <el-col :span="2">
-                                <div class="grid-content bg-purple ">
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <el-row justify="center" align="middle" :gutter="20">
-                            <el-col :span="21">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">地址：</span>{{userProfile.address}}
-                                </div>
-                            </el-col>
-                            <el-col :span="0">
-                                <div class="grid-content bg-purple ">
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <el-row :gutter="20">
-                            <el-col :span="6">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">邮编：</span>{{userProfile.zipcode}}
-                                </div>
-                            </el-col>
-                            <el-col :span="10">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">开户银行：</span>{{userProfile.bankcompany}}
-                                </div>
-                            </el-col>
-                            <el-col :span="5">
-                                <div class="grid-content bg-purple ">
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <el-row justify="center" align="middle" :gutter="20">
-
-                            <el-col :span="15">
-                                <div class="grid-content bg-purple-light">
-                                    <span class="grid-content-head">银行卡号：</span>{{userProfile.bankcard}}
-                                </div>
-                            </el-col>
-                            <el-col :span="6">
-                                <div class="grid-content bg-purple ">
-                                </div>
-                            </el-col>
-                        </el-row>
-                    </div>
-                </section>
-            </el-container>
-        </el-row>
-    </div>
+  <div class="more-container">
+    <div slot="header" style="padding: 10px;">首页</div>
+    <el-row :gutter="24">
+      <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+        <el-card id="chart-card">
+          <div slot="header">各学期平均成绩</div>
+          <div>
+            <div id="main-charts"></div>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+        <el-card>
+          <div slot="header">个人信息</div>
+          <div id="self-info">
+            <div>
+              学号：
+              <span v-if="info.sno">{{info.sno}}</span>
+            </div>
+            <div>
+              姓名：
+              <span v-if="info.name">{{info.name}}</span>
+            </div>
+            <div>
+              班级：
+              <span v-if="info.class">{{info.class}}</span>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+        <el-card>
+          <div slot="header">各科成绩</div>
+          <div id="these-term-grade">
+            <ul id="near-grade-list">
+              <li v-for="(item, index) in near_grade" :key="index">
+                {{ item.course }}: {{ item.score }}
+              </li>
+            </ul>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
 
 </template>
 
@@ -147,85 +50,230 @@
     export default {
         props: ['id', 'name'],
         name: "UserProfile",
-        beforeRouteEnter: (to, from, next)=>{
-
+        beforeRouteEnter: (to, from, next) => {
             next();
         },
         beforeMount() {
-            this.$store.dispatch('getProfile').then(res=>{
-                this.userProfile = res;
-                console.log(res)
-            });
         },
         data() {
             return {
-                imgsrc: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-                userProfile: {
-                    sname: '', pinyin: '', sno: '',
-                    sex: '',birth: '',cardId: '',
-                    phone: '',email: '',fromname: '',
-                    college: '',major: '',classname: '',
-                    address: '',zipcode: '',bankcompany: '',
-                    bankcard: ''
+                nodeEnv: process.env.NODE_ENV,
+                avgData: {
+                    "20181": 10,
+                    "20182": 52,
+                    "20191": 20,
+                    "20192": 33,
+                    "20201": 39,
+                    "20202": 33,
+                    "20211": 22,
+                    "20212": 90
+                },
+                term_grade: [10, 52, 20, 33, 39, 33, 22, 90],
+                near_grade: [
+                    {course: 'math', score: 90},
+                    {course: 'physic', score: 88},
+                ],
+                info: {
+                    sno: '',
+                    name: '',
+                    class: ''
+                },
 
+            }
+        },
+        created() {
+        },
+        mounted() {
+            this.drawLine()
+            this.getInfo()
+        },
+        methods: {
+            drawLine() {
+                // 基于准备好的dom，初始化echarts实例
+                const myChart = this.$echarts.init(
+                    document.getElementById('main-charts')
+                )
+                // var temp_avg
+                // var t = this
+                // .near_grade[0].
+                this.initTheseGrade()
+                const all_average_grade = {
+                    grid: {
+                        left: '4%',
+                        right: '6%',
+                        bottom: '4%',
+                        top: 80,
+                        containLabel: true,
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        position: 'top',
+                        axisPointer: {
+                            type: 'cross',
+                            label: {
+                                backgroundColor: '#6a7985',
+                            },
+                        },
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            /*boundaryGap: false,*/
+                            //坐标轴两边留白策略，即x轴坐标点开始与结束点位置都不在最边缘
+                            // boundaryGap: true,
+                            axisLine: {
+                                show: false,
+                                //x轴线样式
+                                lineStyle: {
+                                    color: '#17273B',
+                                    width: 1,
+                                    type: 'solid',
+                                },
+                            },
+                            //x轴字体设置
+                            axisLabel: {
+                                show: true,
+                                fontSize: 12,
+                                color: 'black',
+                            },
+                            data: [
+                                '20181',
+                                '20182',
+                                '20191',
+                                '20192',
+                                '20201',
+                                '20202',
+                                '20211',
+                                '20212',
+                            ],
+                            axisTick: {
+                                alignWithLabel: true,
+                            },
+                        },
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            //y轴字体设置
+                            axisLabel: {
+                                show: true,
+                                color: 'black',
+                                fontSize: 12,
+                            },
+                            //y轴线设置不显示
+                            axisLine: {
+                                show: false,
+                            },
+                            //与x轴平行的线样式
+                            splitLine: {
+                                show: false,
+                                lineStyle: {
+                                    color: '#17273B',
+                                    width: 1,
+                                    type: 'solid',
+                                },
+                            },
+                        },
+                    ],
+                    series: [
+                        {
+                            name: '成绩',
+                            type: 'line',
+                            smooth: true,
+                            symbol: 'circle',
+                            symbolSize: 6,
+                            lineStyle: {
+                                color: {
+                                    type: 'linear',
+                                    x: 0,
+                                    y: 0,
+                                    x2: 0,
+                                    y2: 1,
+                                    colorStops: [
+                                        {
+                                            // 0% 处的颜色
+                                            offset: 0,
+                                            color: '#6ae6dd',
+                                        },
+                                        {
+                                            offset: 1,
+                                            // 100% 的颜色
+                                            color: 'gray',
+                                        },
+                                    ],
+                                    globalCoord: false,
+                                },
+                                width: 2,
+                                type: 'solid',
+                            },
+                            // 折线连接点的颜色
+                            itemStyle: {
+                                // width: 310,
+                                color: '#00e5de',
+                            },
+                            // 折线堆积区的颜色
+                            // areaStyle: {
+                            //   // color: '#004c5e'
+                            // },
+                            barWidth: '60%',
+                            data: this.term_grade,
+                        },
+                    ],
                 }
+                // 绘制图表
+                myChart.setOption(all_average_grade)
+            },
+            initTheseGrade() {
+                this.term_grade[0] = this.avgData[20181];
+                this.term_grade[1] = this.avgData[20182];
+                this.term_grade[2] = this.avgData[20191];
+                this.term_grade[3] = this.avgData[20182];
+                this.term_grade[4] = this.avgData[20201];
+                this.term_grade[5] = this.avgData[20202];
+                this.term_grade[6] = this.avgData[20211];
+                this.term_grade[7] = this.avgData[20212];
+            },
+            getInfo() {
+                // console.log("do it")
+                this.$store.dispatch("getStudentInfo").then(res => {
+                    // res = JSON.stringify(res)
+                    console.log(res)
+                    this.avgData = res.data.avg
+                    this.info = res.data.info
+                    this.near_grade = res.data.grade
+
+                    this.drawLine()
+                    console.log(this.avgData)
+
+                }).catch(res => {
+                    console.log(res)
+                })
             }
         }
     }
 </script>
 
 <!--<style scoped>-->
-<style>
-    .el-aside{
-        width: 20%;
-        margin: 80px 50px 0px 50px;
-        min-width: 200px;
-    }
-    .el-section{
-        margin: 20px;
-        width: 80%;
-        min-width: 650px;
-    }
-    .el-row {
-        margin-bottom: 10px;
-    }
-    .el-col {
-        /*margin-bottom: 40px;*/
-        border-radius: 4px;
-        font-size: 1.1em;
-    }
-    .bg-purple{
-        background-color: #99a9bf ;
-        height: 44px;
-    }
-    .bg-purple-light {
-        background: #e5e9f2;
-    }
-    .grid-content {
-        border-radius: 4px;
-        min-height: 36px;
-        padding-left: 20px;
-        line-height: 1.7;
-        font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+<style scoped>
 
+    .more-container .el-card {
+      margin-top: 10px;
     }
-    .grid-content-head{
-        color: #409EFF;
-        font-weight: bold;
-        font-size: 1.5em;
+    #main-charts {
+      width: 100%;
+      height: 400px;
     }
-    .aside-box-name{
-        margin-top: 100px;
-        font-size: 3em;
-        font-family: "Microsoft YaHei UI Light";
-        border: #909399 dashed 3px;
-        border-top: 0px;
-        border-left: 0px;
-        border-right: 0px;
+    #chart-card {
+      width: 100%;
     }
-    .aside-box-pingyin{
-        font-size: 1.4em;
-        margin-top: 0px;
-        border: none;
+    #self-info {
+      height: 150px;
+      padding: 8px;
+      font-size: 14pt;
+    }
+    #these-term-grade {
+      height: 200px;
+      padding: 5px;
+      font-size: 12pt;
     }
 </style>

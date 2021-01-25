@@ -1,39 +1,46 @@
-
 import Vue from "vue";
 import Vuex from "vuex";
-import {getAccessToken, setAccessToken} from "../utils/accessToken";
+import {getAccessToken, setAccessToken} from "@/utils/accessToken";
 import {
-  login,
-  logout,
-  getStudentProfile,
-  changePwd,
+  addCourse,
+  addTeacher,
+  allCourses,
+  allTeacher,
   changeAddress,
-  getAwards,
-  getCourses,
-  getCredits,
-  getAllGrades,
-  getTeacherProfile,
+  changePwd,
   changeTeacherAddress,
   changeTeacherBank,
-  getOnlyBySno,
-  setGrade,
-  getGradeInfo,
-  getClassList,
-  getStudentDetail,
-  getAllStudents,
   getAllClasses,
+  getAllClasses2,
   getAllColleges,
-  getAllMajors,
+  getAllCourseNames,
   getAllFroms,
+  getAllGrades,
+  getAllMajors,
+  getAllOffice,
+  getAllStudents,
+  getAwards,
+  getClassList,
+  getCourses,
+  getCredits,
+  getGradeInfo,
+  getOnlyBySno,
+  getStudentDetail,
+  getStudentProfile,
+  getStudentsByInfo,
+  getTeacher,
+  getTeacherProfile,
+  insertStudent,
+  login,
+  setGrade,
+  udpCourse,
   udpStudent,
-  getStudentsByInfo, insertStudent, getAllOffice, addTeacher,
-    allTeacher, udpTeacher, getTeacher, getAllClasses2, getAllCourseNames,
-    addCourse, allCourses, udpCourse
-} from "../api/user";
-import {messageDuration, tokenName} from "../config/settings";
-import {resetRouter} from "../router";
+  udpTeacher,
+  getStudentMain
+} from "@/api/user";
+import {messageDuration} from "@/config/settings";
 import {Message} from "element-ui"
-import da from "element-ui/src/locale/lang/da";
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -84,6 +91,9 @@ const store = new Vuex.Store({
             "error"
         );
       }
+    },
+    async getStudentInfo({commit, state}){
+      return getStudentMain({username: state.username});
     },
     async getProfile({commit, state}) {
       let {data} = await getStudentProfile({username: state.username});

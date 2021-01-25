@@ -7,7 +7,6 @@
             default-active="1-2"
             class="el-menu-vertical-demo"
             background-color="#545c64"
-            style="height: 100%"
             @open="handleOpen"
             @close="handleClose"
             :collapse="isCollapse">
@@ -17,15 +16,15 @@
             <span v-if="!isCollapse">学生成绩管理系统</span>
           </div>
           <el-menu-item-group>
-            <el-menu-item index="1">
+            <el-menu-item index="/student/self">
                 <i class="el-icon-user-solid"></i>
                 <span slot="title">首页</span>
             </el-menu-item>
-            <el-menu-item index="2">
+            <el-menu-item index="/student/grades">
                 <i class="el-icon-collection"></i>
                 <span slot="title">成绩</span>
             </el-menu-item>
-            <el-menu-item index="3">
+            <el-menu-item index="/student/sc">
                 <i class="el-icon-edit-outline"></i>
                 <span slot="title">课程选修</span>
             </el-menu-item>
@@ -49,12 +48,8 @@
           </el-dropdown>
         </el-header>
         <el-main>
-          <div ></div>
           <router-view></router-view>
         </el-main>
-        <el-footer>
-
-        </el-footer>
       </el-container>
     </el-container>
   </div>
@@ -68,25 +63,25 @@
         data(){
             return {
                 isCollapse: false,
-                screenHeight: ''
+                screenHeight: '',
             }
         },
-        methods: {
+      mounted() {
+        this.changeCollapse(false)
+        this.showInfo()
+      },
+      methods: {
           changeCollapse(colla){
             const aside = document.getElementById("left-aside");
             this.isCollapse = colla;
 
             if (!colla) {
-              aside.style.width = "200px"
+              aside.style.width = "210px"
             }
             else {
               aside.style.width = "80px"
             }
           },
-            handleSide() {
-              this.isCollapse=!this.isCollapse
-              console.log(this.isCollapse)
-            },
             handleOpen(key, keyPath) {
                 //console.log(key, keyPath);
             },
@@ -98,6 +93,8 @@
             },
             logout(){
                 this.$router.push("/logout");
+            },
+            showInfo() {
             }
         },
         beforeCreate() {
@@ -114,14 +111,24 @@
 </script>
 
 <style scoped>
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+}
     #page-box,.el-container {
       height: 100%;
+      margin: 0;
     }
+  .el-menu{
+    height: 100%;
+  }
     .el-aside {
       text-align: center;
       line-height: 200px;
       color: white;
-      width: 200px;
+      margin: 0;
       /*height: 100%;*/
       /*position: relative;*/
     }
@@ -135,11 +142,6 @@
         font-size: 20px;
       color: white;
 
-    }
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-        width: 200px;
-        height: 100%;
-        min-height: 100%;
     }
     .el-dropdown-link{
         cursor: pointer;

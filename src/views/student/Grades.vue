@@ -1,7 +1,6 @@
 <template>
     <div>
-        <h1></h1>
-        <h1 style="font-size: 2em; padding: 15px;">成绩查看</h1>
+      <div slot="header">成绩</div>
         <el-divider content-position="left"></el-divider>
         <el-table
                 :data="tableData"
@@ -19,14 +18,6 @@
             <el-table-column
                     prop="tname"
                     label="教师">
-            </el-table-column>
-            <el-table-column
-                    prop="gtype"
-                    label="成绩类型">
-            </el-table-column>
-            <el-table-column
-                    prop="percent"
-                    label="占比">
             </el-table-column>
             <el-table-column
                     prop="grade"
@@ -47,9 +38,7 @@
             }
         },
         beforeCreate() {
-            this.$store.dispatch('getAllGrades').then(res => {
-                this.tableData = res.data;
-            })
+
         },
         computed: {
         }

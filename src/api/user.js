@@ -8,6 +8,21 @@ export async function login(data) {
     });
 }
 
+export async function getStudentMain(data) {
+    return request({
+        url: "/student",
+        method: "post",
+        data,
+    })
+}
+export async function getSelfOfSno(data) {
+    return request({
+        url: "/person/info",
+        method: "get",
+        data,
+    })
+}
+
 export function getStudentProfile(data) {
     return request({
         url: "/student/info",

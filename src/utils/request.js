@@ -11,7 +11,9 @@ const service = axios.create({
     baseURL,
     timeout: requestTimeout,
     headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        // "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/x-www-form-urlencoded"
+        // "Content-Type": "application/json",
     },
 });
 let loadingInstance;
