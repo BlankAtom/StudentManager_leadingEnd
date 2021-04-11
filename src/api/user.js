@@ -127,6 +127,45 @@ export function changeTeacherBank(data) {
     });
 }
 
+export function getAverageGrade(){
+    return request({
+        url: "/admin/average",
+        method: "get"
+    })
+}
+
+export function setStudents(data) {
+    return request({
+        url: "/admin/students",
+        method: "post",
+        data
+    })
+}
+
+export function setTeachers(data) {
+    return request({
+        url: "/admin/teachers",
+        method: "post",
+        data
+    })
+}
+
+export function setCourses(data) {
+    return request({
+        url: "/admin/courses",
+        method: "post",
+        data
+    })
+}
+
+export function printClassGrade(data) {
+    return request({
+        url: "/admin/cls/grade",
+        method: "post",
+        data
+    })
+}
+
 export function getGradeInfo(data) {
     return request({
         url: "/teacher/gradeInfo",

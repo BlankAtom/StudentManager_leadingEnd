@@ -156,6 +156,10 @@ const constantRoutes = [{
                 },
             },
             {
+                path: '/admin/home',
+                component: () => import('@/views/admin/Profile')
+            },
+            {
                 path: '/admin/allStudent',
                 meta: {
                     needLogin: true
@@ -184,6 +188,31 @@ const constantRoutes = [{
                 component: () => import('../views/admin/InsertCourse')
             },
             {
+                path: '/admin/print',
+                component: () => import('@/views/admin/PrintPage')
+            },
+            {
+                path: '/admin/setCourse',
+                meta: {
+                    needLogin: true
+                },
+                component: () => import('../views/admin/SetCourse')
+            },
+            {
+                path: '/admin/setStudent',
+                meta: {
+                    needLogin: true
+                },
+                component: () => import('../views/admin/SetStudent')
+            },
+            {
+                path: '/admin/setTeacher',
+                meta: {
+                    needLogin: true
+                },
+                component: () => import('../views/admin/SetTeacher')
+            },
+            {
                 path: '/admin/allCourse',
                 meta: {
                     needLogin: true
@@ -198,7 +227,7 @@ const constantRoutes = [{
 
     },{
         path: '/',
-        component: Main,
+        component: () => import('@/views/login'),
         meta: {
             auth: false
         }

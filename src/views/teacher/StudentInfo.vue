@@ -5,11 +5,6 @@
         <el-row :gutter="24">
             <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="3">
                 <el-input placeholder="选择班级" v-model="search.classname">
-                    <el-option
-                        v-for="item in classes"
-                        :key="item.classname"
-                        :label="item.classname"
-                        :value="item.classname"></el-option>
                 </el-input>
             </el-col>
             <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="3">
@@ -29,34 +24,34 @@
                 :data="filterData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
                 border
                 style="width: 100%">
+
             <el-table-column
-                    prop="class"
-                    label="班级"
-            >
+                prop="sno"
+                label="学号">
             </el-table-column>
             <el-table-column
-                    prop="sno"
-                    label="学号">
+                prop="sname"
+                label="姓名">
             </el-table-column>
             <el-table-column
-                    prop="sname"
-                    label="姓名">
+                prop="clsno"
+                label="班级">
             </el-table-column>
             <el-table-column
-                    prop="cname"
-                    label="课程">
+                prop="cname"
+                label="课程">
             </el-table-column>
-<!--            <el-table-column-->
-<!--                    prop="etype"-->
-<!--                    label="考核类型">-->
-<!--            </el-table-column>-->
-<!--            <el-table-column-->
-<!--                    prop="percent"-->
-<!--                    label="占比">-->
-<!--            </el-table-column>-->
             <el-table-column
-                    prop="score"
-                    label="成绩">
+                prop="tname"
+                label="教师">
+            </el-table-column>
+            <el-table-column
+                prop="term"
+                label="学期">
+            </el-table-column>
+            <el-table-column
+                prop="score"
+                label="成绩">
             </el-table-column>
         </el-table>
         <el-pagination
@@ -81,11 +76,13 @@
                 filterData: [],
                 tableData: [
                     {
-                        sname: '',
                         sno: '',
-                        class: '',
+                        sname: '',
                         cname: '',
-                        score: ''
+                        tname: '',
+                        clsno: '',
+                        term: '',
+                        score: '',
                     },
                 ],
                 search: {
@@ -135,18 +132,22 @@
             printFile() {
                 let datalist = [];
                 datalist.push([
-                    "班级",
                     "学号",
                     "姓名",
+                    "班级",
                     "课程",
+                    "教师",
+                    "学期",
                     "成绩",
                 ]);
                 this.tableData.forEach(item => {
                     datalist.push([
-                        item.class,
                         item.sno,
                         item.sname,
+                        item.clsno,
                         item.cname,
+                        item.tname,
+                        item.term,
                         item.score,
                     ]);
                 });
@@ -161,12 +162,7 @@
                  });
             },
             getClassList(){
-                this.$store.dispatch('getClassList').then(res => {
-                    this.classes = res.data;
-                })
             },
-            classChanged(){
-            }
         }
     }
 </script>

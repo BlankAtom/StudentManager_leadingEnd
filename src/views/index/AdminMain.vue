@@ -1,67 +1,68 @@
 <template>
-    <el-container>
-        <el-menu
-                router
-                default-active="1-2"
-                class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose"
-                :collapse="isCollapse">
-
-            <el-submenu index="1">
-                <template slot="title">
-                    <i class="el-icon-user-solid"></i>
-                    <span slot="title">学生管理</span>
-                </template>
-                <el-menu-item index="/admin/addStudent">增加学生</el-menu-item>
-                <el-menu-item index="/admin/allStudent">学生总览</el-menu-item>
-            </el-submenu>
-            <el-submenu index="2">
-                <template slot="title">
-                    <i class="el-icon-collection"></i>
-                    <span slot="title">教师管理</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="/admin/addTeacher">增加教师</el-menu-item>
-                    <el-menu-item index="/admin/allTeacher">教师总览</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="3">
-                <template slot="title">
-                    <i class="el-icon-edit-outline"></i>
-                    <span slot="title">课程管理</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="/admin/addCourse">增加课程</el-menu-item>
-                    <el-menu-item index="/admin/allCourse">课程总览</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
-            <el-menu-item index="/admin">
-                <i class="el-icon-setting"></i>
-                <span slot="title">返回主页</span>
-            </el-menu-item>
-        </el-menu>
+    <div id="page-box">
         <el-container>
-            <el-header >
-                <el-radio-group v-model="isCollapse" style="float: left;margin-bottom: 20px;">
-                    <el-radio-button :label="true" >收起</el-radio-button>
-                    <el-radio-button :label="false" >展开</el-radio-button>
-                </el-radio-group>
-                <el-dropdown style="margin-right: 15px; font-size: 25px" >
+            <el-aside  id="left-aside">
+                <el-menu
+                    router
+                    default-active="/admin/home"
+                    class="el-menu-vertical-demo"
+                    background-color="#545c64"
+                    @open="handleOpen"
+                    @close="handleClose"
+                    :collapse="isCollapse">
 
-                    <span class="el-dropdown-link">
-                        <i class="el-icon-setting"><span></span></i>
-                    </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </el-header>
-            <el-main>
-                <router-view></router-view>
-            </el-main>
+                    <div id="sider-header" @click="changeCollapse(!isCollapse)" >
+                        <i class="el-icon-s-home"></i>
+                        <span v-if="!isCollapse">学生成绩管理系统</span>
+                    </div>
+                    <el-menu-item-group>
+                        <el-menu-item index="/admin/home">
+                            <i class="el-icon-user-solid"></i>
+                            <span slot="title">首页</span>
+                        </el-menu-item>
+                        <el-menu-item index="/admin/setStudent">
+                            <i class="el-icon-collection"></i>
+                            <span slot="title">录入学生</span>
+                        </el-menu-item>
+                        <el-menu-item index="/admin/setTeacher">
+                            <i class="el-icon-edit-outline"></i>
+                            <span slot="title">录入教师</span>
+                        </el-menu-item>
+                        <el-menu-item index="/admin/setCourse">
+                            <i class="el-icon-edit-outline"></i>
+                            <span slot="title">录入课程</span>
+                        </el-menu-item>
+
+                        <el-menu-item index="/admin/print">
+                            <i class="el-icon-edit-outline"></i>
+                            <span slot="title">打印</span>
+                        </el-menu-item>
+
+                    </el-menu-item-group>
+
+                </el-menu>
+            </el-aside>
+
+            <el-container>
+                <el-header >
+                    <el-dropdown style="margin-right: 15px; font-size: 25px" >
+
+            <span class="el-dropdown-link">
+                <span>{{username}}</span>
+                <i class="el-icon-setting"><span></span></i>
+            </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item @click.native="toProfile" >首页</el-dropdown-item>
+                            <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </el-header>
+                <el-main>
+                    <router-view></router-view>
+                </el-main>
+            </el-container>
         </el-container>
-    </el-container>
+    </div>
 </template>
 
 <script>
@@ -72,12 +73,32 @@
                 isCollapse: false
             }
         },
+        mounted() {
+            this.changeCollapse(false)
+            this.showInfo()
+        },
         methods:{
+            changeCollapse(colla) {
+                const aside = document.getElementById("left-aside");
+                this.isCollapse = colla;
+
+                if (!colla) {
+                    aside.style.width = "210px"
+                } else {
+                    aside.style.width = "80px"
+                }
+            },
             handleOpen(key, keyPath) {
                 //console.log(key, keyPath);
             },
             handleClose(key, keyPath) {
                 //console.log(key, keyPath);
+            },
+            toProfile() {
+                this.$router.push("/admin/home");
+            },
+            logout() {
+                this.$router.push("/logout");
             },
         },
         beforeCreate(){
@@ -93,18 +114,42 @@
 </script>
 
 <style scoped>
-    .el-header{
-        padding-top: 10px;
-        text-align: right;
-        font-size: 20px;
-        background-color: #f0fcff;
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+#page-box,.el-container {
+    height: 100%;
+    margin: 0;
+}
+.el-menu{
+    height: 100%;
+}
+.el-aside {
+    text-align: center;
+    line-height: 200px;
+    color: white;
+    margin: 0;
+    /*height: 100%;*/
+    /*position: relative;*/
+}
+.el-menu-item {
+    color: white;
+    font-size: 12pt;
+}
+.el-header{
+    padding: 10px;
+    text-align: right;
+    font-size: 20px;
+    color: white;
 
-    }
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-        width: 250px;
-        min-height: 500px;
-    }
-    .el-dropdown-link{
-        cursor: pointer;
-    }
+}
+.el-dropdown-link{
+    cursor: pointer;
+}
+#sider-header {
+    text-align: center;
+}
 </style>

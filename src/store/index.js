@@ -19,6 +19,7 @@ import {
   getAllMajors,
   getAllOffice,
   getAllStudents,
+  getAverageGrade,
   getAwards,
   getClassList,
   getCourses,
@@ -33,8 +34,12 @@ import {
   getTeacherProfile,
   insertStudent,
   login,
+  printClassGrade,
+  setCourses,
   setGrade,
   setGrades,
+  setStudents,
+  setTeachers,
   udpCourse,
   udpStudent,
   udpTeacher
@@ -79,11 +84,13 @@ const store = new Vuex.Store({
   },
   actions:{
     async login({ commit, state }, userInfo) {
-      const { data } = await login(userInfo);
-      //console.log(data);
+      console.log(userInfo)
+      const {data}  = await login(userInfo);
+      console.log(data);
+      console.log(data.uname);
       if(data!=null){
-        commit('setUserName', data.uid)
-        commit('setPower', data.upower);
+        commit('setUserName', data.uname)
+        commit('setPower', data.power);
         showMsg('欢迎登录', 'success' );
       }
       else{
@@ -96,6 +103,15 @@ const store = new Vuex.Store({
     async setGrades({commit, state}, data){
       return setGrades(data);
     },
+    async setStudents({commit, state}, data){
+      return setStudents(data);
+    },
+    async setTeachers({commit, state}, data){
+      return setTeachers(data);
+    },
+    async setCourses({commit, state}, data){
+      return setCourses(data);
+    },
     async getStudentInfo({commit, state}){
       return getStudentMain({username: state.username});
     },
@@ -103,6 +119,9 @@ const store = new Vuex.Store({
       let {data} = await getStudentProfile({username: state.username});
       //console.log(data);
       return data;
+    },
+    async printClassGrade({commit, state}, data){
+      return printClassGrade(data);
     },
     async changePwd({commit, state}, data){
       let newdata = {username: state.username ,old: data.oldpassword, new: data.newpassword};
@@ -164,8 +183,10 @@ const store = new Vuex.Store({
     },
     async getGradeInfo({commit, state}, data){
       let newdata = {username: state.username, classname: data.classname, sno: data.sno, sname: data.sname};
-      let res = await getGradeInfo(newdata);
-      return res;
+      return getGradeInfo(newdata);
+    },
+    async getAverageGrade({commit, state}){
+      return getAverageGrade();
     },
     async getClassList({commit, state}){
       let newdata = {username: state.username};

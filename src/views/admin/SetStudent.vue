@@ -1,74 +1,74 @@
 <template>
     <div>
+        <div slot="header">录入学生</div>
+        <el-divider content-position="left"></el-divider>
+        <el-row :gutter="24" style="height: 80px">
+            <el-col :span="3" style="padding-bottom: 20px; ">
+                <el-upload
+                    class="upload-demo" action=""
+                    :on-change="handleChange"
+                    :on-remove="handleRemove"
+                    :on-exceed="handleExceed"
+                    :limit="limitUpload"
+                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+                    :auto-upload="false">
+                    <el-button  class="el-icon-upload" size="small" >点击上传</el-button>
 
-        <div>
-            <div slot="header">成绩</div>
-            <el-divider content-position="left"></el-divider>
-            <el-row :gutter="24">
-                <el-col :span="3" style="padding-bottom: 20px">
-                    <el-upload
-                        class="upload-demo" action=""
-                        :on-change="handleChange"
-                        :on-remove="handleRemove"
-                        :on-exceed="handleExceed"
-                        :limit="limitUpload"
-                        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
-                        :auto-upload="false">
-                        <el-button  class="el-icon-upload" size="small" >点击上传</el-button>
+                </el-upload>
+            </el-col>
+            <el-col :span="3">
+                <el-button class="el-icon-success" size="small"
+                           @click="onSubmit">确定上传</el-button>
+            </el-col>
+        </el-row>
 
-                    </el-upload>
-                </el-col>
-                <el-col :span="3">
-                    <el-button class="el-icon-success" size="small"
-                               @click="onSubmit">确定上传</el-button>
-                </el-col>
-            </el-row>
-            <el-table
-                :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-                border
-                style="width: 100%">
-                <el-table-column
-                    prop="sno"
-                    label="学号">
-                </el-table-column>
 
-                <el-table-column
-                    prop="term"
-                    label="学期">
-                </el-table-column>
-                <el-table-column
-                    prop="cno"
-                    label="课程">
-                </el-table-column>
-                <el-table-column
-                    prop="tno"
-                    label="教师">
-                </el-table-column>
-                <el-table-column
-                    prop="score"
-                    label="成绩">
-                </el-table-column>
-            </el-table>
-            <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[5, 10, 20, 40]"
-                :page-size="pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="tableData.length">
-            </el-pagination>
-        </div>
+        <el-table
+            :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+            border
+            style="width: 100%">
+            <el-table-column
+                prop="sno"
+                label="学号(sno)">
+            </el-table-column>
+
+            <el-table-column
+                prop="sname"
+                label="姓名(sname)">
+            </el-table-column>
+            <el-table-column
+                prop="card_id"
+                label="身份证号(card_id)">
+            </el-table-column>
+            <el-table-column
+                prop="clsno"
+                label="班级号(clsno)">
+            </el-table-column>
+        </el-table>
+        <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[5, 10, 20, 40]"
+            :page-size="pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="tableData.length">
+        </el-pagination>
     </div>
 </template>
 
 <script>
 export default {
-    name: "SetGradeByFile",
+    name: "SetStudent",
     data() {
         return {
             tableData: [
-                {}
+                {
+                    sno: 0,
+                    sname: 1,
+                    card_id: 2,
+                    clsno: 3
+                }
             ],
             dalen: 0,
             pageSize: 10,
@@ -81,9 +81,13 @@ export default {
     methods: {
         onSubmit() {
             console.log('submit!');
-            this.$store.dispatch('setGrades', this.tableData ).then(res => {
-                console.log(res.data);
-            }).catch();
+            if(this.file===null){
+                alert("请上传文件")
+            }else {
+                this.$store.dispatch('setStudents', this.tableData ).then(res => {
+                    console.log(res.data);
+                }).catch();
+            }
 
         },
         importfxx(obj) {
@@ -130,10 +134,11 @@ export default {
                     outdata.map(v => {
                         let obj = {}
                         obj.sno = v['sno']
-                        obj.tno = v['tno']
-                        obj.cno = v['cno']
-                        obj.term = v['term']
-                        obj.score = v['score']
+                        obj.sname = v['sname']
+                        obj.card_id = v['card_id']
+                        obj.clsno = v['clsno']
+                        // obj.tname = v['tname']
+                        // obj.score = v['score']
                         arr.push(obj)
                     });
                     _this.tableData = arr;

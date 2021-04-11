@@ -1,4 +1,5 @@
 module.exports = {
+    publicPath: './',
     outputDir: 'dist',  // 输出文件目录
     devServer: {
         //baseUrl: "http://localhost:8080/", //  用用程序默认部署位置，‘/’根目录，存放子目录ex：‘/web/’
